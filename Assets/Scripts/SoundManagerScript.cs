@@ -37,7 +37,7 @@ public class SoundManagerScript : MonoBehaviour
                 audioSrc.PlayOneShot(reloadSound);
                 break;
             case "encounter_loop":
-                audioSrc.PlayOneShot(backgroundMusic);
+            //    audioSrc.PlayOneShot(backgroundMusic);
                 break;
         }
 

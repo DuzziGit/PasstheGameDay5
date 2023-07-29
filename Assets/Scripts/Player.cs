@@ -197,6 +197,7 @@ public class Player : MonoBehaviour, IHittable
 			if (curHealth < 1)
 			{
 				uiScript.gameOver.gameObject.SetActive(true);
+				rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
 
 			}
 		}

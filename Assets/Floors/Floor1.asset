@@ -18,9 +18,13 @@ MonoBehaviour:
   enemies:
   - {fileID: 6342794010561626004, guid: 96a33b9d855855842a7a54959872abc7, type: 3}
   - {fileID: 6342794010561626004, guid: baf98d73d7fcfeb48995b7a59a272d97, type: 3}
-  minDec: 5
-  maxDec: 10
+  minDec: 20
+  maxDec: 60
   decorations:
-  - {fileID: 9011940536107864369, guid: 8c093df01157edb48a258cfeea0640ef, type: 3}
+  - {fileID: 9011940536107864369, guid: d643b5dc0f47d694a8ee32a42e4b01b6, type: 3}
+  - {fileID: 9011940536107864369, guid: 73e3e62925493d64eb5cb39ae8602969, type: 3}
+  - {fileID: 9011940536107864369, guid: bb82d1dde7d9fed4e87fa22ca29b29f5, type: 3}
+  - {fileID: 9011940536107864369, guid: 08fd8bfb475636049a8718eb23055ce6, type: 3}
+  - {fileID: 9011940536107864369, guid: ff23f464755b0fa4389fa79a53318f33, type: 3}
   floorTile:
   - {fileID: 11400000, guid: c788db35ee0d8c24fa33e2435e482805, type: 2}

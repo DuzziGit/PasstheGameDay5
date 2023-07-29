@@ -53,7 +53,6 @@ public class Player : MonoBehaviour, IHittable
 
     // Shooting variables
     private Vector2 shootingDirection;
-    [SerializeField] private GameObject bulletPrefab;
 
     private void Awake()
     {
@@ -137,7 +136,7 @@ public class Player : MonoBehaviour, IHittable
         gunChamber.Clear();
         for (int i = 0; i < 6; i++)
         {
-            gunChamber.Add(Random.Range(min, max));
+            gunChamber.Add(i);
             uiScript.AmmoUpdate(gunChamber);
             currentShot = 0;
         }

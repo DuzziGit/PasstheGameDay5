@@ -526,10 +526,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe22d9518d53f3f4da91b70e5cf028f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 5411006670797117135}
   maxHealth: 25
   moveSpeed: 6
   head: {fileID: 5702906888390823733}
+  animator: {fileID: 5411006670797117135}
   projectileObjects:
   - {fileID: 6514229213537963326, guid: a21cdfc9f6e5f4149a4472a3bcbc37de, type: 3}
   - {fileID: 6514229213537963326, guid: 5b75842ea7e551648a2ae45ffa08c717, type: 3}
@@ -540,12 +540,12 @@ MonoBehaviour:
   weapon: {fileID: 2784346876320848238}
   firePoint: {fileID: 8348910052482628066}
   rotSpeed: 8
+  wandController: {fileID: 0}
   gunChamber: 000000000100000002000000030000000400000005000000
   spriteRend: {fileID: 1151283384118681645}
   yAmp: 0.1
   yFrq: 24
   aniMoveSpeed: 0
-  bulletPrefab: {fileID: 0}
 --- !u!50 &7953846171807210410
 Rigidbody2D:
   serializedVersion: 4
@@ -596,7 +596,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.08195317, y: -0.17181323}
+  m_Offset: {x: -0.043708384, y: -0.13903195}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -607,7 +607,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.83609366, y: 1.2610804}
+  m_Size: {x: 1.2403959, y: 1.8729974}
   m_EdgeRadius: 0
 --- !u!1 &8788543382169252157
 GameObject:

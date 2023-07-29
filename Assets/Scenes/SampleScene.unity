@@ -327,10 +327,10 @@ MonoBehaviour:
   mapVisualiser: {fileID: 1068910035}
   startPos: {x: -50, y: -50}
   walkParameters: {fileID: 11400000, guid: 49417390d7b7ea94a86c8c5b5a093317, type: 2}
-  dungeonWidth: 418
-  dungeonHeight: 459
+  dungeonWidth: 100
+  dungeonHeight: 100
   offset: 4
-  maxRoomCount: 3
+  maxRoomCount: 5
   createBasicRooms: 1
   minRoomWidth: 34
   minRoomHeight: 25

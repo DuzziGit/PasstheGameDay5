@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour
     private float speed;
     [SerializeField]
     private int damage;
-    private int lifeTime = 1;
+    private int lifeTime = 2;
 
     private Vector2 target,dir;
 
@@ -22,7 +22,7 @@ public class Projectile : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("PlayerBullets"), true);
+       // Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("PlayerBullets"), true);
     }
     // Start is called before the first frame update
     void Start()
@@ -58,13 +58,16 @@ public class Projectile : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
+        canHitSelf = true;
         if (!canHitSelf && other.gameObject == owner)
             return;
+
 
         IHittable hit = other.GetComponent<IHittable>();
         if (hit != null)
         {
             hit.Hit(damage);
+            Debug.Log("Hit = ");
             Destroy(gameObject);
         }
 
@@ -75,13 +78,13 @@ public class Projectile : MonoBehaviour
         {
             Vector2 wallNormal = collision.contacts[0].normal;
             ChangeDirection(Vector3.Reflect(lastVelocity.normalized * 2f, wallNormal));
-            Debug.Log(dir);
+            //Debug.Log(dir);
             lifeTime -= 1;
         }
     }
-    private enum Spell { Wound, Skewer, Guardian, Frog, Freeze, Explosion }
-    private Spell spellEffect;
-    private void SpellEffect()
+    public enum Spell { Wound, Skewer, Guardian, Frog, Freeze, Explosion }
+    public Spell spellEffect;
+    public void SpellEffect()
     {
         switch (spellEffect)
         {

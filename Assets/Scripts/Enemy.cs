@@ -49,12 +49,14 @@ public class Enemy : MonoBehaviour,IHittable
     {
         if(active)
              health -= damage;
-    }
+
+		StartCoroutine(HitVisual());
+	}
 
     public void Hit(int dam)
     {
-        StartCoroutine(HitVisual());
-        DoDamage(dam);
+		ProjectileType();
+		DoDamage(dam);
     }
 
     private void Awake()
@@ -99,9 +101,7 @@ public class Enemy : MonoBehaviour,IHittable
 
         if (distanceFromPlayer > stoppingDistance) { 
             transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
-       // else if (distanceFromPlayer < retreatDistance)
-       // {
-         //   transform.position = Vector2.MoveTowards(transform.position, realPlayer.position, -speed * Time.deltaTime);
+
 
         }
     }
@@ -143,12 +143,41 @@ public class Enemy : MonoBehaviour,IHittable
 	private IEnumerator HitVisual()
 	{
 
-		rb.isKinematic = true;
 		spriteRend.color = Color.red;
 		yield return new WaitForSeconds(0.2f);
         spriteRend.color = Color.white;
-		rb.isKinematic = false;
 
+	}
+
+    private void ProjectileType()
+    {
+		GameObject proj = GameObject.FindWithTag("Projectile");
+
+
+        //I'm so sorry
+        if (proj.name == "Basic(Clone)")
+        {
+            Debug.Log(proj.name);
+        }
+        else if (proj.name == "Fire(Clone)")
+        {
+            StartCoroutine(Burn());
+		}
+		else if (proj.name == "Explosion(Clone)")
+		{
+			Debug.Log(proj.name);
+		}
+		else if (proj.name == "Heal(Clone)")
+		{
+			Debug.Log(proj.name);
+		}
+		else if (proj.name == "FMJ(Clone)")
+		{
+			Debug.Log(proj.name);
+		}
+		else if (proj.name == "Split(Clone)")
+		{
+		}
 	}
 
 
@@ -165,5 +194,18 @@ public class Enemy : MonoBehaviour,IHittable
 		{
 			GameObject.Find("Player(Clone)").GetComponent<Player>().DoDamage(meleeDamage);
 		}
+	}
+
+	private IEnumerator Burn()
+	{
+        for (int i = 0; i < 5; i++)
+        {
+            yield return new WaitForSeconds(0.6f);
+            DoDamage(0.2f);
+			yield return new WaitForSeconds(0.6f);
+
+		}
+		
+
 	}
 }

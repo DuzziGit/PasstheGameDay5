@@ -37,7 +37,7 @@ public class Player : MonoBehaviour, IHittable
 	private bool canDash = false;
 	private bool isDashing = false;
 	private float dashingPower = 15f;
-	private float dashingTime = 0.4f;
+	private float dashingTime = 0.8f;
 	private float dashingCooldown = 2.0f;
 
 	[Header("Effects")]
@@ -175,11 +175,14 @@ public class Player : MonoBehaviour, IHittable
 		}
 		else//fire
 		{
+			Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("PlayerBullets"), true);
+			StartCoroutine(IgnorePlayer());
 			SoundManagerScript.PlaySound("fire");
 			GameObject proj = Instantiate(projectileObjects[gunChamber[0]], firePoint.transform.position, weapon.rotation);
 			gunChamber.RemoveAt(0);
 			weapon.DOPunchRotation(new Vector3(0, 0, 60f), 0.12f);
 			proj.GetComponent<Projectile>().ChangeDirection(lookAxis);
+			//Debug.Log(proj.GetComponent<Projectile>());
 			uiScript.RotateBarrel(currentShot);
 			currentShot++;
 		}
@@ -227,14 +230,22 @@ public class Player : MonoBehaviour, IHittable
 		spriteRend.color = Color.black;
 		canDash = false;
 		isDashing = true;
-		
+		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("PlayerBullets"), true);
+		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("EnemyBullets"), true);
+		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemies"), true);
 
 		rb.velocity = moveAxis * dashingPower;
 		yield return new WaitForSeconds(dashingTime);
 		spriteRend.color = Color.white;
+
+		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("PlayerBullets"), false);
+		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("EnemyBullets"), false);
+		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemies"), false);
+
 		isDashing = false;
 		yield return new WaitForSeconds(dashingCooldown);
-		
+
+
 		
 		canDash = true;
 		
@@ -253,4 +264,11 @@ public class Player : MonoBehaviour, IHittable
 		}
 		canBeDamaged = true;
 	}
+
+	private IEnumerator IgnorePlayer()
+	{
+		yield return new WaitForSeconds(0.1f);
+		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("PlayerBullets"), false);
+	}
+
 }

@@ -378,6 +378,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3293610270406124981}
   - component: {fileID: 7039868902168349566}
+  - component: {fileID: 5411006670797117135}
   m_Layer: 0
   m_Name: PlayerSprite
   m_TagString: Untagged
@@ -452,6 +453,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &5411006670797117135
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7116002200706779035}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b3ef9aaab622867439d9f5c962398038, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7190575130774256182
 GameObject:
   m_ObjectHideFlags: 0
@@ -589,17 +611,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe22d9518d53f3f4da91b70e5cf028f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 5411006670797117135}
   maxHealth: 25
   moveSpeed: 6
-  player: {fileID: 7953846171807210420}
-  radius: 0
+  head: {fileID: 5702906888390823733}
   projectileObjects:
   - {fileID: 6514229213537963326, guid: a21cdfc9f6e5f4149a4472a3bcbc37de, type: 3}
   - {fileID: 6514229213537963326, guid: 5b75842ea7e551648a2ae45ffa08c717, type: 3}
   - {fileID: 6514229213537963326, guid: 0ce4cfd423688f141b81a8425741e2bd, type: 3}
   - {fileID: 6514229213537963326, guid: fcead118d40663040b86d0117598b0e7, type: 3}
   - {fileID: 6514229213537963326, guid: 7c95f31a3237089419c1c3d6058bfec7, type: 3}
-  - {fileID: 6514229213537963326, guid: 27b3bc402f16cce4abfad70ba32ca15b, type: 3}
+  - {fileID: 6514229213537963326, guid: a21cdfc9f6e5f4149a4472a3bcbc37de, type: 3}
   weapon: {fileID: 2784346876320848238}
   firePoint: {fileID: 8348910052482628066}
   rotSpeed: 8
@@ -658,7 +680,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.1723901}
+  m_Offset: {x: 0.03303218, y: -0.41851908}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -669,7 +691,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.9057786}
+  m_Size: {x: 1.1541502, y: 1.5020517}
   m_EdgeRadius: 0
 --- !u!1 &8788543382169252157
 GameObject:

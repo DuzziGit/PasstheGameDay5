@@ -10,6 +10,8 @@ public class Player : MonoBehaviour, IHittable
 {
 	Rigidbody2D rb;
 
+	public Animator animator;
+
 	[Header("Stats")]
 	[SerializeField]
 	private int maxHealth;
@@ -21,6 +23,7 @@ public class Player : MonoBehaviour, IHittable
 	Vector2 moveAxis, lookAxis;
 	[SerializeField] private PlayerControls controls;
 	private InputAction move, look, fire, earlyReload, roll;
+	public GameObject head;
 
 	[Header("Shooting")]
 	[SerializeField] GameObject[] projectileObjects;
@@ -29,6 +32,8 @@ public class Player : MonoBehaviour, IHittable
 	[Header("Ammo")]
 	public List<int> gunChamber = new List<int> { 2, 2, 2, 2, 2, 5 };
 	private int currentShot;
+
+	private bool canBeDamaged = true;
 
 
 	//Dash/Roll
@@ -56,6 +61,7 @@ public class Player : MonoBehaviour, IHittable
 		gameManager = GameObject.Find("GameManager");
 		uiScript = gameManager.GetComponent<UIManager>();
 		uiScript.AmmoUpdate(gunChamber);
+
 
 		curHealth = maxHealth;
 		controls = new PlayerControls();
@@ -110,7 +116,7 @@ public class Player : MonoBehaviour, IHittable
 		gunChamber.Clear();
 		for (int i = 0; i < 6; i++)
 		{
-			gunChamber.Add(Random.Range(min, max));
+			gunChamber.Add(i);
 			uiScript.AmmoUpdate(gunChamber);
 			currentShot = 0;
 		}
@@ -127,14 +133,16 @@ public class Player : MonoBehaviour, IHittable
 
 	public void Roll(InputAction.CallbackContext context)
 	{
-		if(canDash) {
+		if (canDash)
+		{
 			StartCoroutine(Dash());
 		}
-		
+
 	}
 
 	private void RotateWeapon()
 	{
+
 		//Changed code so you aim with mouse, much smoother gameplay
 		lookAxis = Camera.main.ScreenToWorldPoint(Input.mousePosition) - weapon.position;
 		float angle = Mathf.Atan2(lookAxis.y, lookAxis.x) * Mathf.Rad2Deg;
@@ -160,15 +168,12 @@ public class Player : MonoBehaviour, IHittable
 			spriteRend.gameObject.transform.localPosition = Vector3.zero;
 
 		var direction = Mathf.Sign(lookAxis.x);
-spriteRend.transform.localScale = new Vector3(0.4f * direction, 0.4f, 1f);
-firePoint.transform.localScale = new Vector3(0.4f * direction, 0.4f, 1f);
+		//	spriteRend.transform.localScale = new Vector3(direction, 1f, 1f);
+		firePoint.transform.localScale = new Vector3(direction, 1f, 1f);
 
 	}
 	private void Fire(InputAction.CallbackContext context)
-{
-	if (currentShot == 6)//reload
 	{
-<<<<<<< Updated upstream
 		if (currentShot == 6)//reload
 		{
 			Reload(1, 6);
@@ -186,31 +191,14 @@ firePoint.transform.localScale = new Vector3(0.4f * direction, 0.4f, 1f);
 			uiScript.RotateBarrel(currentShot);
 			currentShot++;
 		}
-=======
-		Reload(1, 6);
->>>>>>> Stashed changes
 	}
-	else//fire
-	{
-		SoundManagerScript.PlaySound("fire");
-		GameObject proj = Instantiate(projectileObjects[gunChamber[0]], firePoint.transform.position, weapon.rotation);
-		Vector2 fireDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - firePoint.position;
-		proj.GetComponent<Projectile>().ChangeDirection(fireDirection);
-		gunChamber.RemoveAt(0);
-		weapon.DOPunchRotation(new Vector3(0, 0, 60f), 0.12f);
-		uiScript.RotateBarrel(currentShot);
-		currentShot++;
-	}
-}
 	public void DoDamage(int damage)
 	{
-		curHealth -= damage;
-		if (curHealth < 1)
+		if (canBeDamaged)
 		{
-<<<<<<< Updated upstream
 			canBeDamaged = false;
 			StartCoroutine(HitVisual());
-			
+
 			curHealth -= damage;
 			uiScript.HealthChange(curHealth);
 			Debug.Log("current hp =  " + curHealth);
@@ -220,11 +208,8 @@ firePoint.transform.localScale = new Vector3(0.4f * direction, 0.4f, 1f);
 				rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
 
 			}
-=======
-			uiScript.gameOver.gameObject.SetActive(true);
->>>>>>> Stashed changes
 		}
-		uiScript.HealthChange(curHealth);
+		//uiScript.HealthChange(curHealth);
 
 	}
 
@@ -239,16 +224,18 @@ firePoint.transform.localScale = new Vector3(0.4f * direction, 0.4f, 1f);
 
 	public void Hit(int dam)
 	{
+
 		DoDamage(dam);
 	}
 
 	private IEnumerator Dash()
 	{
-		
-		Debug.Log("Dash Used");
+
+		animator.SetBool("isRolling", true);
+		head.SetActive(false);
+		spriteRend.color = Color.black;
 		canDash = false;
 		isDashing = true;
-<<<<<<< Updated upstream
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("PlayerBullets"), true);
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("EnemyBullets"), true);
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemies"), true);
@@ -256,31 +243,23 @@ firePoint.transform.localScale = new Vector3(0.4f * direction, 0.4f, 1f);
 		rb.velocity = moveAxis * dashingPower;
 		yield return new WaitForSeconds(dashingTime);
 		spriteRend.color = Color.white;
+		animator.SetBool("isRolling", false);
 
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("PlayerBullets"), false);
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("EnemyBullets"), false);
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemies"), false);
+		head.SetActive(true);
 
 		isDashing = false;
 		yield return new WaitForSeconds(dashingCooldown);
 
 
-		
-=======
-		//float originalGravity = rb.gravityscale;
 
-		rb.velocity = moveAxis * dashingPower;
-		yield return new WaitForSeconds(dashingTime);
-		isDashing = false;
-		yield return new WaitForSeconds(dashingCooldown);
-		
-		Debug.Log("Dash Refreshed");
->>>>>>> Stashed changes
 		canDash = true;
-		
+
+
 	}
 
-<<<<<<< Updated upstream
 	private IEnumerator HitVisual()
 	{
 
@@ -296,10 +275,8 @@ firePoint.transform.localScale = new Vector3(0.4f * direction, 0.4f, 1f);
 
 	private IEnumerator IgnorePlayer()
 	{
-		yield return new WaitForSeconds(0.1f);
+		yield return new WaitForSeconds(0.7f);
 		Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("PlayerBullets"), false);
 	}
 
-=======
->>>>>>> Stashed changes
 }

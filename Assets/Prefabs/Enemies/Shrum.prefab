@@ -134,10 +134,10 @@ MonoBehaviour:
   spriteRend: {fileID: 0}
   active: 0
   maxHealth: 1
+  meleeDamage: 2
   speed: 2
-  stoppingDistance: 4
+  stoppingDistance: 1
   retreatDistance: 8
-  projectileObject: {fileID: 6514229213537963326, guid: 3a3e1450e248e09419e3e0b4f7d77963, type: 3}
   startTimeBtwShots: 3
   aniMoveSpeed: 0
   yAmp: 0.1

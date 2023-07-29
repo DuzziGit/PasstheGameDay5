@@ -30,6 +30,8 @@ public class Player : MonoBehaviour, IHittable
 	public List<int> gunChamber = new List<int> { 2, 2, 2, 2, 2, 5 };
 	private int currentShot;
 
+	private bool canBeDamaged = true;
+
 
 	//Dash/Roll
 	private bool canDash = false;
@@ -183,12 +185,20 @@ public class Player : MonoBehaviour, IHittable
 	}
 	public void DoDamage(int damage)
 	{
-		curHealth -= damage;
-		if (curHealth < 1)
+		if (canBeDamaged)
 		{
-			uiScript.gameOver.gameObject.SetActive(true);
+			canBeDamaged = false;
+			StartCoroutine(HitVisual());
+			
+			curHealth -= damage;
+
+			Debug.Log("current hp =  " + curHealth);
+			if (curHealth < 1)
+			{
+				uiScript.gameOver.gameObject.SetActive(true);
+			}
 		}
-		uiScript.HealthChange(curHealth);
+		//uiScript.HealthChange(curHealth);
 
 	}
 
@@ -203,25 +213,41 @@ public class Player : MonoBehaviour, IHittable
 
 	public void Hit(int dam)
 	{
+		
 		DoDamage(dam);
 	}
 
 	private IEnumerator Dash()
 	{
 		
-		Debug.Log("Dash Used");
+		
+		spriteRend.color = Color.black;
 		canDash = false;
 		isDashing = true;
-		//float originalGravity = rb.gravityscale;
+		
 
 		rb.velocity = moveAxis * dashingPower;
 		yield return new WaitForSeconds(dashingTime);
+		spriteRend.color = Color.white;
 		isDashing = false;
 		yield return new WaitForSeconds(dashingCooldown);
 		
-		Debug.Log("Dash Refreshed");
+		
 		canDash = true;
 		
+
 	}
 
+	private IEnumerator HitVisual()
+	{
+
+		for (int x = 0; x < 7; x++)
+		{
+			spriteRend.color = Color.cyan;
+			yield return new WaitForSeconds(0.1f);
+			spriteRend.color = Color.white;
+			yield return new WaitForSeconds(0.1f);
+		}
+		canBeDamaged = true;
+	}
 }

@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour
     private float speed;
     [SerializeField]
     private int damage;
-    private int lifeTime = 3;
+    private int lifeTime = 1;
 
     private Vector2 target,dir;
 

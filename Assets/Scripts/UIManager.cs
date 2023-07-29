@@ -27,14 +27,15 @@ public class UIManager : MonoBehaviour
         ammoSlot = 0;
         currentSceneName = SceneManager.GetActiveScene().name;
     }
-
+    /*
     public void HealthChange(int currentHealth)
     {
         if (currentHealth > 0)
             healthDie.sprite = healthDice[currentHealth - 1];
         /*else
-            SceneManager.LoadScene(currentSceneName);*/
+            SceneManager.LoadScene(currentSceneName);
     }
+*/
 
 public void RotateBarrel(int currentShot)
 {

@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour,IHittable
 
     private Transform player;
 
+    private Player realPlayer;
+
     [SerializeField] private SpriteRenderer spriteRend;
     [SerializeField]
     private bool active = false;
@@ -18,7 +20,10 @@ public class Enemy : MonoBehaviour,IHittable
     private float maxHealth;
     private float health;
 
-    [SerializeField]
+	[SerializeField]
+	private int meleeDamage;
+
+	[SerializeField]
     private float speed;
     [SerializeField]
     private float stoppingDistance;
@@ -26,8 +31,8 @@ public class Enemy : MonoBehaviour,IHittable
     private float retreatDistance;
 
     [Header("shooting")]
-    [SerializeField]
-    private GameObject projectileObject;
+    //[SerializeField]
+    //private GameObject projectileObject;
     [SerializeField]
     private float startTimeBtwShots;
     private float timeBtwShots;
@@ -58,6 +63,8 @@ public class Enemy : MonoBehaviour,IHittable
         rb.gravityScale = 0;
         rb.freezeRotation = true;
 
+
+
         spriteRend = GetComponentInChildren<SpriteRenderer>();
         health = maxHealth;
     }
@@ -65,6 +72,7 @@ public class Enemy : MonoBehaviour,IHittable
     private void Start()
     {
         timeBtwShots = startTimeBtwShots;
+        
     }
 
     // Update is called once per frame
@@ -79,7 +87,7 @@ public class Enemy : MonoBehaviour,IHittable
         
         Movement();
         UpdateAnimator();
-        FireBullet();
+        //FireBullet();
 
     }
 
@@ -87,21 +95,21 @@ public class Enemy : MonoBehaviour,IHittable
     {
         float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
 
-        if (distanceFromPlayer > stoppingDistance)
+        if (distanceFromPlayer > stoppingDistance) { 
             transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
-        else if (distanceFromPlayer < retreatDistance)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, player.position, -speed * Time.deltaTime);
+       // else if (distanceFromPlayer < retreatDistance)
+       // {
+         //   transform.position = Vector2.MoveTowards(transform.position, realPlayer.position, -speed * Time.deltaTime);
 
         }
     }
-
+    /*
     private void FireBullet()
     {
         if (timeBtwShots <= 0)
         {
             GameObject proj = Instantiate(projectileObject, transform.position, Quaternion.identity);
-            proj.GetComponent<EnemyProjectile>().ChangeTarget(player.position, gameObject);
+            proj.GetComponent<EnemyProjectile>().ChangeTarget(realPlayer.position, gameObject);
 
 
             timeBtwShots = startTimeBtwShots;
@@ -109,6 +117,7 @@ public class Enemy : MonoBehaviour,IHittable
         else
             timeBtwShots -= Time.deltaTime;
     }
+    */
 
     [Header("Effects")]
     [SerializeField] private float aniMoveSpeed, yAmp = 0.1f, yFrq = 24f;
@@ -131,8 +140,27 @@ public class Enemy : MonoBehaviour,IHittable
 	private IEnumerator HitVisual()
 	{
 		spriteRend.color = Color.red;
-		yield return new WaitForSeconds(0.1f);
+		yield return new WaitForSeconds(0.2f);
         spriteRend.color = Color.white;
 
+	}
+
+
+	void OnTriggerStay2D(Collider2D other)
+	{
+		if (other.CompareTag("Player"))
+		{
+            GameObject.Find("Player(Clone)").GetComponent<Player>().DoDamage(meleeDamage);
+			//Debug.Log("Take Damage: " + meleeDamage);
+
+		}
+	}
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.CompareTag("Player"))
+		{
+			//Debug.Log("(ENTER) Take Damage: " + meleeDamage);
+			GameObject.Find("Player(Clone)").GetComponent<Player>().DoDamage(meleeDamage);
+		}
 	}
 }

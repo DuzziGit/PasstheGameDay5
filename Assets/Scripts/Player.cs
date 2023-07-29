@@ -112,7 +112,7 @@ public class Player : MonoBehaviour, IHittable
 		gunChamber.Clear();
 		for (int i = 0; i < 6; i++)
 		{
-			gunChamber.Add(Random.Range(min, max));
+			gunChamber.Add(i);
 			uiScript.AmmoUpdate(gunChamber);
 			currentShot = 0;
 		}
@@ -162,7 +162,7 @@ public class Player : MonoBehaviour, IHittable
 			spriteRend.gameObject.transform.localPosition = Vector3.zero;
 
 		var direction = Mathf.Sign(lookAxis.x);
-		spriteRend.transform.localScale = new Vector3(direction, 1f, 1f);
+	//	spriteRend.transform.localScale = new Vector3(direction, 1f, 1f);
 		firePoint.transform.localScale = new Vector3(direction, 1f, 1f);
 
 	}

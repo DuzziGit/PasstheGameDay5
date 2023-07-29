@@ -14,11 +14,11 @@ GameObject:
   - component: {fileID: 5122179293473881041}
   - component: {fileID: 8996785060174881055}
   - component: {fileID: 6402216435887481558}
-  - component: {fileID: -7810360851096083735}
-  - component: {fileID: -4243558731888803065}
-  - component: {fileID: -2311991288456920968}
+  - component: {fileID: 6274399159931726977}
+  - component: {fileID: -8103265785734003738}
+  - component: {fileID: -5375784357690480910}
   m_Layer: 7
-  m_Name: Freeze
+  m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,8 +80,8 @@ SpriteRenderer:
   m_SortingLayerID: -1764787627
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 82b92275f3b1cc94694d56dbe6712af1, type: 3}
-  m_Color: {r: 0.48235297, g: 0.8352942, b: 0.95294124, a: 1}
+  m_Sprite: {fileID: -909595597, guid: 7678508ae34b9594aba448417f0ef772, type: 3}
+  m_Color: {r: 0.86666673, g: 0.25882354, b: 0.28627452, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -158,7 +158,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.25
---- !u!120 &-7810360851096083735
+--- !u!120 &6274399159931726977
 LineRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -231,8 +231,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.42352945, g: 0.53333336, b: 1, a: 1}
-      key1: {r: 0.42352945, g: 0.53333336, b: 1, a: 1}
+      key0: {r: 0.98823535, g: 0.98823535, b: 0.98823535, a: 1}
+      key1: {r: 0.98823535, g: 0.98823535, b: 0.98823535, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -266,7 +266,7 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!198 &-4243558731888803065
+--- !u!198 &-8103265785734003738
 ParticleSystem:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -456,7 +456,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.3372549, g: 0.427451, b: 0.8000001, a: 1}
+      maxColor: {r: 0.854902, g: 0.25490198, b: 0.28235295, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4973,7 +4973,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!199 &-2311991288456920968
+--- !u!199 &-5375784357690480910
 ParticleSystemRenderer:
   serializedVersion: 6
   m_ObjectHideFlags: 0

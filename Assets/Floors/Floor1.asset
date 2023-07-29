@@ -23,4 +23,4 @@ MonoBehaviour:
   decorations:
   - {fileID: 9011940536107864369, guid: 8c093df01157edb48a258cfeea0640ef, type: 3}
   floorTile:
-  - {fileID: 11400000, guid: b69603f3a5c0c7c4cba1ef69ffd1175e, type: 2}
+  - {fileID: 11400000, guid: c788db35ee0d8c24fa33e2435e482805, type: 2}

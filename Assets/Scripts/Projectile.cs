@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour
     private float speed;
     [SerializeField]
     private int damage;
-    private int lifeTime = 1;
+    private int lifeTime = 4;
 
     private Vector2 target,dir;
 
@@ -68,16 +68,27 @@ public class Projectile : MonoBehaviour
         }
 
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+private void OnCollisionEnter2D(Collision2D collision)
+{
+    if (collision.gameObject != owner)
     {
-        if (collision.gameObject != owner)
-        {
-            Vector2 wallNormal = collision.contacts[0].normal;
-            ChangeDirection(Vector3.Reflect(lastVelocity.normalized * 2f, wallNormal));
-            Debug.Log(dir);
-            lifeTime -= 1;
-        }
+        Vector2 wallNormal = collision.contacts[0].normal;
+        Vector2 newDirection = Vector2.Reflect(lastVelocity.normalized, wallNormal);
+
+        // Normalize the direction to get a pure direction vector
+        newDirection.Normalize();
+
+        // Change the direction of the object.
+        ChangeDirection(newDirection);
+
+        // Update the rotation of the object to face the new direction.
+        float angle = Mathf.Atan2(newDirection.y, newDirection.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90)); // Subtracting 90 degrees to compensate for the Unity coordinate system
+
+        Debug.Log(dir);
+        lifeTime -= 1;
     }
+}
     private enum Spell { Wound, Skewer, Guardian, Frog, Freeze, Explosion }
     private Spell spellEffect;
     private void SpellEffect()

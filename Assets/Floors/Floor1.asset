@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Floor1
   m_EditorClassIdentifier: Assembly-CSharp::NewBehaviourScript
   FloorName: Floor
-  minEnemies: 1
-  maxEnemies: 4
+  minEnemies: 20
+  maxEnemies: 30
   enemies:
   - {fileID: 6342794010561626004, guid: 96a33b9d855855842a7a54959872abc7, type: 3}
   - {fileID: 6342794010561626004, guid: baf98d73d7fcfeb48995b7a59a272d97, type: 3}

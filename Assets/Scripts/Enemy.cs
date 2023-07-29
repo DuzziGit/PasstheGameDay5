@@ -48,6 +48,7 @@ public class Enemy : MonoBehaviour,IHittable
 
     public void Hit(int dam)
     {
+        StartCoroutine(HitVisual());
         DoDamage(dam);
     }
 
@@ -126,4 +127,12 @@ public class Enemy : MonoBehaviour,IHittable
         else
             spriteRend.gameObject.transform.localPosition = Vector3.zero;
     }
+
+	private IEnumerator HitVisual()
+	{
+		spriteRend.color = Color.red;
+		yield return new WaitForSeconds(0.1f);
+        spriteRend.color = Color.white;
+
+	}
 }

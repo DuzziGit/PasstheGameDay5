@@ -39,8 +39,8 @@ public class Player : MonoBehaviour, IHittable
     private bool canDash = false;
     private bool isDashing = false;
     private float dashingPower = 15f;
-    private float dashingTime = 0.8f;
-    private float dashingCooldown = 2.0f;
+    private float dashingTime = 0.3f;
+    private float dashingCooldown = 1f;
 
     [Header("Effects")]
     [SerializeField] private SpriteRenderer spriteRend;

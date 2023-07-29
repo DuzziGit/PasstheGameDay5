@@ -191,11 +191,12 @@ public class Player : MonoBehaviour, IHittable
 			StartCoroutine(HitVisual());
 			
 			curHealth -= damage;
-
+			uiScript.HealthChange(curHealth);
 			Debug.Log("current hp =  " + curHealth);
 			if (curHealth < 1)
 			{
 				uiScript.gameOver.gameObject.SetActive(true);
+
 			}
 		}
 		//uiScript.HealthChange(curHealth);

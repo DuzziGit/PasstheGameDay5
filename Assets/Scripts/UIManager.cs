@@ -6,8 +6,12 @@ using TMPro;
 using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
+
+
 {
-    public GameObject player, ammoSlots;
+
+	public GameObject player, ammoSlots;
+    public GameObject blackSquare;
     private Player playerScript;
     public Image healthDie;
     public List<Image> gunChambers, gunAmmoLoaded;
@@ -27,15 +31,16 @@ public class UIManager : MonoBehaviour
         ammoSlot = 0;
         currentSceneName = SceneManager.GetActiveScene().name;
     }
-    /*
+
     public void HealthChange(int currentHealth)
     {
-        if (currentHealth > 0)
-            healthDie.sprite = healthDice[currentHealth - 1];
-        /*else
-            SceneManager.LoadScene(currentSceneName);
-    }
-*/
+        if (currentHealth > 0) { 
+            //Update Health?
+         } else if(currentHealth <= 0) {
+			StartCoroutine(FadeBlackOutSquare());
+		}
+   }
+
 
 public void RotateBarrel(int currentShot)
 {
@@ -101,4 +106,39 @@ public void RotateBarrel(int currentShot)
         }
         ammoSlot = 0;
     }
+
+    public void Lose()
+    {
+		StartCoroutine(FadeBlackOutSquare());
+	}
+
+	public IEnumerator FadeBlackOutSquare(bool fadeToBlack = true, int fadeSpeed = 1)
+	{
+		Debug.Log("Fade");
+		Color objectColor = blackSquare.GetComponent<Image>().color;
+		float fadeAmount;
+
+		if (fadeToBlack)
+		{
+			while (blackSquare.GetComponent<Image>().color.a < 1)
+			{
+				fadeAmount = objectColor.a + (fadeSpeed * Time.deltaTime);
+
+				objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
+				blackSquare.GetComponent<Image>().color = objectColor;
+				yield return null;
+			}
+		}
+		else
+		{
+			while (blackSquare.GetComponent<Image>().color.a > 0)
+			{
+				fadeAmount = objectColor.a - (fadeSpeed * Time.deltaTime);
+
+				objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
+				blackSquare.GetComponent<Image>().color = objectColor;
+				yield return null;
+			}
+		}
+	}
 }

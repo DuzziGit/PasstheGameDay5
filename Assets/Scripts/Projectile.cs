@@ -44,14 +44,16 @@ public class Projectile : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        rb.velocity = (dir * Mathf.Max(speed, 0f) /** Time.fixedDeltaTime*/);
+            rb.velocity = (dir * Mathf.Max(speed, 0f));
+
+        //rb.velocity = (dir * Mathf.Max(speed, 0f) /** Time.fixedDeltaTime*/);
         //transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
     }
-    public void ChangeTarget(Vector2 target, GameObject self)
-    {
-        this.target = new Vector2(target.x - transform.position.x, target.y - transform.position.y);
-        this.owner = self;
-    }
+   public void ChangeTarget(Vector2 target, GameObject self)
+{
+    this.dir = (target - (Vector2)transform.position).normalized;
+    this.owner = self;
+}
     public void ChangeDirection(Vector2 newDir)
     {
         dir = newDir;

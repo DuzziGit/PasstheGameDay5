@@ -14,9 +14,8 @@ public class UIManager : MonoBehaviour
     private Color ammoColor;
     public List<int> gunChamberStorage;
     private int ammoValue, ammoSlot;
-    public Sprite emptyChamber, loadedChamber;
+    public Sprite emptyChamber,YellowSpell,OrangeSpell,PurpleSpell,BlueSpell,RedSpell,GreenSpell;
     public List<Sprite> healthDice;
-
     private string currentSceneName;
 
     public TMP_Text gameOver;
@@ -37,11 +36,26 @@ public class UIManager : MonoBehaviour
             SceneManager.LoadScene(currentSceneName);*/
     }
 
-    public void RotateBarrel(int currentShot)
+public void RotateBarrel(int currentShot)
+{
+    gunChambers[currentShot].sprite = emptyChamber;
+
+    // Store the original rotations
+    List<Quaternion> originalRotations = new List<Quaternion>();
+    foreach (Image chamberImage in gunChambers)
     {
-        gunChambers[currentShot].sprite = emptyChamber;
-        ammoSlots.transform.rotation = Quaternion.Euler(0f, 0f, (currentShot + 1) * 60f);
+        originalRotations.Add(chamberImage.transform.rotation);
     }
+
+    // Rotate the ammoSlots
+    ammoSlots.transform.rotation = Quaternion.Euler(0f, 0f, (currentShot + 1) * 60f);
+
+    // Counter-rotate the gunChambers
+    for (int i = 0; i < gunChambers.Count; i++)
+    {
+        gunChambers[i].transform.rotation = originalRotations[i];
+    }
+}
 
     public void AmmoUpdate(List<int> chamberValues)
     {
@@ -51,33 +65,33 @@ public class UIManager : MonoBehaviour
                 switch (ammoValue)
                 {
                     case 0:
-                        gunChambers[ammoSlot].sprite = loadedChamber;
-                        gunChambers[ammoSlot].color = new Color(1f, 0.13f, 0.27f, 1f);
+                        gunChambers[ammoSlot].sprite = BlueSpell;
+                       // gunChambers[ammoSlot].color = new Color(1f, 0.13f, 0.27f, 1f);
                         ammoSlot++;
                         break;
                     case 1:
-                        gunChambers[ammoSlot].sprite = loadedChamber;
-                        gunChambers[ammoSlot].color = new Color(0.97f, 1f, 0.55f, 1f);
+                        gunChambers[ammoSlot].sprite = RedSpell;
+                       // gunChambers[ammoSlot].color = new Color(0.97f, 1f, 0.55f, 1f);
                         ammoSlot++;
                         break;
                     case 2:
-                        gunChambers[ammoSlot].sprite = loadedChamber;
-                        gunChambers[ammoSlot].color = new Color(0.39f, 0.25f, 0.84f, 1f);
+                        gunChambers[ammoSlot].sprite = OrangeSpell;
+                       // gunChambers[ammoSlot].color = new Color(0.39f, 0.25f, 0.84f, 1f);
                         ammoSlot++;
                         break;
                     case 3:
-                        gunChambers[ammoSlot].sprite = loadedChamber;
-                        gunChambers[ammoSlot].color = new Color(0.75f, 0.69f, 0.03f, 1f);
+                        gunChambers[ammoSlot].sprite = YellowSpell;
+                       // gunChambers[ammoSlot].color = new Color(0.75f, 0.69f, 0.03f, 1f);
                         ammoSlot++;
                         break;
                     case 4:
-                        gunChambers[ammoSlot].sprite = loadedChamber;
-                        gunChambers[ammoSlot].color = new Color(0.48f, 0.83f, 0.95f, 1f);
+                        gunChambers[ammoSlot].sprite = PurpleSpell;
+                      //  gunChambers[ammoSlot].color = new Color(0.48f, 0.83f, 0.95f, 1f);
                         ammoSlot++;
                         break;
                     case 5:
-                        gunChambers[ammoSlot].sprite = loadedChamber;
-                        gunChambers[ammoSlot].color = new Color(0.89f, 0.38f, 0.20f, 1f);
+                        gunChambers[ammoSlot].sprite =GreenSpell;
+                       // gunChambers[ammoSlot].color = new Color(0.89f, 0.38f, 0.20f, 1f);
                         ammoSlot++;
                         break;
                     default:

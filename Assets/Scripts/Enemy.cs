@@ -31,8 +31,8 @@ public class Enemy : MonoBehaviour,IHittable
     private float retreatDistance;
 
     [Header("shooting")]
-    //[SerializeField]
-    //private GameObject projectileObject;
+    [SerializeField]
+    private GameObject projectileObject;
     [SerializeField]
     private float startTimeBtwShots;
     private float timeBtwShots;
@@ -81,13 +81,15 @@ public class Enemy : MonoBehaviour,IHittable
         if (!active)
             return;
 
+		FireBullet();
 
-        if (health <= 0)
+		if (health <= 0)
             Destroy(gameObject);
-        
-        Movement();
+
+		
+		Movement();
         UpdateAnimator();
-        //FireBullet();
+        
 
     }
 
@@ -103,23 +105,24 @@ public class Enemy : MonoBehaviour,IHittable
 
         }
     }
-    /*
+
     private void FireBullet()
     {
         if (timeBtwShots <= 0)
         {
-            GameObject proj = Instantiate(projectileObject, transform.position, Quaternion.identity);
-            proj.GetComponent<EnemyProjectile>().ChangeTarget(realPlayer.position, gameObject);
-
-
+            Instantiate(projectileObject, transform.position, Quaternion.identity);
+            
             timeBtwShots = startTimeBtwShots;
         }
-        else
-            timeBtwShots -= Time.deltaTime;
-    }
-    */
 
-    [Header("Effects")]
+        else
+        {
+            timeBtwShots -= Time.deltaTime;
+        }
+    }
+
+
+[Header("Effects")]
     [SerializeField] private float aniMoveSpeed, yAmp = 0.1f, yFrq = 24f;
     void UpdateAnimator()
     {
@@ -139,9 +142,12 @@ public class Enemy : MonoBehaviour,IHittable
 
 	private IEnumerator HitVisual()
 	{
+
+		rb.isKinematic = true;
 		spriteRend.color = Color.red;
 		yield return new WaitForSeconds(0.2f);
         spriteRend.color = Color.white;
+		rb.isKinematic = false;
 
 	}
 
@@ -151,15 +157,12 @@ public class Enemy : MonoBehaviour,IHittable
 		if (other.CompareTag("Player"))
 		{
             GameObject.Find("Player(Clone)").GetComponent<Player>().DoDamage(meleeDamage);
-			//Debug.Log("Take Damage: " + meleeDamage);
-
 		}
 	}
 	void OnTriggerEnter2D(Collider2D other)
 	{
 		if (other.CompareTag("Player"))
 		{
-			//Debug.Log("(ENTER) Take Damage: " + meleeDamage);
 			GameObject.Find("Player(Clone)").GetComponent<Player>().DoDamage(meleeDamage);
 		}
 	}

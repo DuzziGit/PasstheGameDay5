@@ -329,11 +329,11 @@ MonoBehaviour:
   walkParameters: {fileID: 11400000, guid: 49417390d7b7ea94a86c8c5b5a093317, type: 2}
   dungeonWidth: 418
   dungeonHeight: 459
-  offset: 3
-  maxRoomCount: 15
+  offset: 2
+  maxRoomCount: 5
   createBasicRooms: 1
-  minRoomWidth: 46
-  minRoomHeight: 31
+  minRoomWidth: 34
+  minRoomHeight: 25
   roomObject: {fileID: 1166479633434537972, guid: a671ad05f9555d243a124e069f703f61, type: 3}
   floorType: {fileID: 11400000, guid: 0c372f62932485a4cb89805a8b3af0ad, type: 2}
   playerObject: {fileID: 7953846171807210420, guid: 9f10c279f6ca5614591d89f3169fe852, type: 3}

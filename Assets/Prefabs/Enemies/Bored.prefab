@@ -218,12 +218,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRend: {fileID: 0}
   active: 0
-  maxHealth: 2
-  meleeDamage: 4
+  maxHealth: 4
+  meleeDamage: 5
   speed: 4
   stoppingDistance: 1
   retreatDistance: 5
-  startTimeBtwShots: 12
+  projectileObject: {fileID: 6514229213537963326, guid: 3a3e1450e248e09419e3e0b4f7d77963, type: 3}
+  startTimeBtwShots: 900
   aniMoveSpeed: 0
   yAmp: 0.1
   yFrq: 24

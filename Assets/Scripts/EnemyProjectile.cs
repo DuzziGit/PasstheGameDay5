@@ -17,6 +17,7 @@ public class EnemyProjectile : MonoBehaviour
     private Rigidbody2D rb;
     private Vector3 lastVelocity;
 
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -26,7 +27,8 @@ public class EnemyProjectile : MonoBehaviour
     void Start()
     {
         target = Vector2.up;
-    }
+		Transform player = GameObject.FindGameObjectWithTag("Player").transform;
+	}
 
     // Update is called once per frame
     void Update()

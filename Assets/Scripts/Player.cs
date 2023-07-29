@@ -137,6 +137,7 @@ public class Player : MonoBehaviour, IHittable
 
 	private void RotateWeapon()
 	{
+
 		//Changed code so you aim with mouse, much smoother gameplay
 		lookAxis = Camera.main.ScreenToWorldPoint(Input.mousePosition) - weapon.position;
 		float angle = Mathf.Atan2(lookAxis.y, lookAxis.x) * Mathf.Rad2Deg;

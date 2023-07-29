@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 5122179293473881041}
   - component: {fileID: 8996785060174881055}
   - component: {fileID: 6402216435887481558}
-  - component: {fileID: -7563348020484437403}
-  - component: {fileID: -4464369205905472642}
-  - component: {fileID: -420087673439328278}
+  - component: {fileID: 5173339685944664964}
+  - component: {fileID: -5033278970337879214}
+  - component: {fileID: 224325963259488386}
   m_Layer: 7
   m_Name: Heal
   m_TagString: Projectile
@@ -81,11 +81,11 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -909595597, guid: 7678508ae34b9594aba448417f0ef772, type: 3}
-  m_Color: {r: 0.4784314, g: 0.8745099, b: 0.16862746, a: 1}
+  m_Color: {r: 0.2589805, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.33, y: 0.33}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -103,8 +103,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5294521f9609a8046a22b774ea4d1e10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  damage: 1
+  speed: 8
+  damage: 4
+  spellEffect: 0
 --- !u!50 &5122179293473881041
 Rigidbody2D:
   serializedVersion: 4
@@ -139,9 +140,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.000000059604645, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.26054233
 --- !u!58 &6402216435887481558
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -158,7 +159,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.25
---- !u!120 &-7563348020484437403
+--- !u!120 &5173339685944664964
 LineRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -231,8 +232,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.6627451, b: 0.22352943, a: 1}
-      key1: {r: 1, g: 0.6627451, b: 0.22352943, a: 1}
+      key0: {r: 0.6117647, g: 0.019607844, b: 0.39607847, a: 1}
+      key1: {r: 0.6117647, g: 0.019607844, b: 0.39607847, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -266,7 +267,7 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!198 &-4464369205905472642
+--- !u!198 &-5033278970337879214
 ParticleSystem:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -456,7 +457,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.4039216, g: 0.77647066, b: 0.16862746, a: 1}
+      maxColor: {r: 0.16078432, g: 0.76470596, b: 0.8470589, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4973,7 +4974,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!199 &-420087673439328278
+--- !u!199 &224325963259488386
 ParticleSystemRenderer:
   serializedVersion: 6
   m_ObjectHideFlags: 0
@@ -4994,7 +4995,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

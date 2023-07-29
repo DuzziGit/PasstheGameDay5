@@ -126,15 +126,15 @@ public class Enemy : MonoBehaviour,IHittable
     [SerializeField] private float aniMoveSpeed, yAmp = 0.1f, yFrq = 24f;
     void UpdateAnimator()
     {
-        var direction = Mathf.Sign(player.transform.position.x-transform.position.x);
-        spriteRend.transform.localScale = new Vector3(direction, 1f, 1f);
+      //  var direction = Mathf.Sign(player.transform.position.x-transform.position.x);
+       // spriteRend.transform.localScale = new Vector3(direction, 1f, 1f);
 
         Vector2 latSpeed = rb.velocity;
         aniMoveSpeed = Vector3.SqrMagnitude(latSpeed);
         if (aniMoveSpeed > 0)
         {
-            float yPos = Mathf.Sin(Time.time * yFrq) * yAmp;
-            spriteRend.gameObject.transform.localPosition = new Vector3(0, yPos, 0);//bounce sprite
+          //  float yPos = Mathf.Sin(Time.time * yFrq) * yAmp;
+          //  spriteRend.gameObject.transform.localPosition = new Vector3(0, yPos, 0);//bounce sprite
         }
         else
             spriteRend.gameObject.transform.localPosition = Vector3.zero;

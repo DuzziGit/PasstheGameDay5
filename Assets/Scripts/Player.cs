@@ -20,7 +20,7 @@ public class Player : MonoBehaviour, IHittable
 	private float moveSpeed;
 	Vector2 moveAxis, lookAxis;
 	[SerializeField] private PlayerControls controls;
-	private InputAction move, look, fire, earlyReload;
+	private InputAction move, look, fire, earlyReload, roll;
 
 	[Header("Shooting")]
 	[SerializeField] GameObject[] projectileObjects;
@@ -29,6 +29,14 @@ public class Player : MonoBehaviour, IHittable
 	[Header("Ammo")]
 	public List<int> gunChamber = new List<int> { 2, 2, 2, 2, 2, 5 };
 	private int currentShot;
+
+
+	//Dash/Roll
+	private bool canDash = false;
+	private bool isDashing = false;
+	private float dashingPower = 15f;
+	private float dashingTime = 0.4f;
+	private float dashingCooldown = 2.0f;
 
 	[Header("Effects")]
 	[SerializeField] private SpriteRenderer spriteRend;
@@ -58,9 +66,15 @@ public class Player : MonoBehaviour, IHittable
 		move = controls.Player.Move;
 		move.Enable();
 
+		/*
 		earlyReload = controls.Player.Reload;
 		earlyReload.Enable();
 		earlyReload.performed += EarlyReload;
+		*/
+
+		roll = controls.Player.Roll;
+		roll.Enable();
+		roll.performed += Roll;
 
 
 		fire = controls.Player.Fire;
@@ -75,10 +89,12 @@ public class Player : MonoBehaviour, IHittable
 	private void Start()
 	{
 		Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera.Follow = this.gameObject.transform;
+		canDash = true;
 	}
 	// Update is called once per frame
 	void Update()
 	{
+
 		if (curHealth <= 0)
 			Debug.Log("death");
 
@@ -100,11 +116,21 @@ public class Player : MonoBehaviour, IHittable
 		}
 		firePoint.DOPunchRotation(new Vector3(0, 0, 361), .25f);
 	}
-
+	/*
 	public void EarlyReload(InputAction.CallbackContext context)
 	{
 		Debug.Log("early reload");
 		Reload(1, 6);
+	}
+	*/
+
+
+	public void Roll(InputAction.CallbackContext context)
+	{
+		if(canDash) {
+			StartCoroutine(Dash());
+		}
+		
 	}
 
 	private void RotateWeapon()
@@ -168,13 +194,34 @@ public class Player : MonoBehaviour, IHittable
 
 	private void FixedUpdate()
 	{
-		rb.velocity = moveAxis.normalized * moveSpeed /** Time.fixedDeltaTime*/;
-		//rb.MovePosition(rb.position + moveAxis.normalized * moveSpeed * Time.fixedDeltaTime);
+		if (!isDashing)
+		{
+			rb.velocity = moveAxis.normalized * moveSpeed /** Time.fixedDeltaTime*/;
+			//rb.MovePosition(rb.position + moveAxis.normalized * moveSpeed * Time.fixedDeltaTime);
+		}
 	}
 
 	public void Hit(int dam)
 	{
 		DoDamage(dam);
+	}
+
+	private IEnumerator Dash()
+	{
+		
+		Debug.Log("Dash Used");
+		canDash = false;
+		isDashing = true;
+		//float originalGravity = rb.gravityscale;
+
+		rb.velocity = moveAxis * dashingPower;
+		yield return new WaitForSeconds(dashingTime);
+		isDashing = false;
+		yield return new WaitForSeconds(dashingCooldown);
+		
+		Debug.Log("Dash Refreshed");
+		canDash = true;
+		
 	}
 
 }

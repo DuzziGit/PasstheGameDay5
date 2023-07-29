@@ -591,6 +591,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 25
   moveSpeed: 6
+  player: {fileID: 7953846171807210420}
+  radius: 0
   projectileObjects:
   - {fileID: 6514229213537963326, guid: a21cdfc9f6e5f4149a4472a3bcbc37de, type: 3}
   - {fileID: 6514229213537963326, guid: 5b75842ea7e551648a2ae45ffa08c717, type: 3}

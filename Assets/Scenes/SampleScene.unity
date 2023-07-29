@@ -1328,13 +1328,13 @@ MonoBehaviour:
   wallFull:
   - {fileID: 11400000, guid: 8441bddc69492b6418d2f8a686706d8d, type: 2}
   wallInnerCornerDownLeft:
-  - {fileID: 11400000, guid: 8441bddc69492b6418d2f8a686706d8d, type: 2}
+  - {fileID: 11400000, guid: 8994e1c420adfea40a864fe064fcab09, type: 2}
   wallInnerCornerDownRight:
-  - {fileID: 11400000, guid: 8441bddc69492b6418d2f8a686706d8d, type: 2}
+  - {fileID: 11400000, guid: 8994e1c420adfea40a864fe064fcab09, type: 2}
   wallDiagonalCornerDownRight:
-  - {fileID: 11400000, guid: 8441bddc69492b6418d2f8a686706d8d, type: 2}
+  - {fileID: 11400000, guid: 8994e1c420adfea40a864fe064fcab09, type: 2}
   wallDiagonalCornerDownLeft:
-  - {fileID: 11400000, guid: 8441bddc69492b6418d2f8a686706d8d, type: 2}
+  - {fileID: 11400000, guid: 8994e1c420adfea40a864fe064fcab09, type: 2}
   wallDiagonalCornerUpRight:
   - {fileID: 11400000, guid: 8441bddc69492b6418d2f8a686706d8d, type: 2}
   wallDiagonalCornerUpLeft:
